@@ -9,14 +9,16 @@ interface IconProps {
 
 interface ButtonProps extends TouchableOpacityProps {
   icon?: React.ComponentType<IconProps>;
+  iconColor?: string
   text: string;
+  textColor?: string;
 }
 
-export function Button({ text, icon: IconComponent, ...rest }: ButtonProps) {
+export function Button({ text, icon: IconComponent, textColor,iconColor,  ...rest }: ButtonProps) {
   return (
     <Container {...rest}>
-      {IconComponent && <IconComponent color="white" size={18}/>}
-      <Text>{text}</Text>
+      {IconComponent && <IconComponent color={iconColor ?? "white"} size={18}/>}
+      <Text color={textColor}>{text}</Text>
     </Container>
   );
 }

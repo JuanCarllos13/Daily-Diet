@@ -38,10 +38,3 @@ export const Text = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
   color: ${({ theme }) => theme.COLORS.GRAY_200};
 `;
-
-export const Circle = styled.View`
-  width: 20px;
-  height: 20px;
-  border-radius: 10px;
-  background-color: ${({ theme }) => theme.COLORS.RED_MID};
-`;

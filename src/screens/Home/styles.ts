@@ -25,7 +25,7 @@ export const Image = styled.Image`
   border-color: #333638;
 `;
 
-export const BoxPorcentagem = styled.View`
+export const BoxPorcentagem = styled.TouchableOpacity`
   width: 100%;
   background-color: ${({ theme }) => theme.COLORS.GREEN_MID};
   height: 102px;
@@ -61,6 +61,7 @@ export const Snack = styled.Text`
 `;
 
 export const TextDate = styled.Text`
+  margin-top: 20px;
   color: ${({ theme }) => theme.COLORS.GRAY_100};
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;

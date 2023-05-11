@@ -7,6 +7,7 @@ import {
   Nunito_700Bold,
 } from "@expo-google-fonts/nunito";
 import Theme from "@theme/index";
+import { Routes } from "@routes/index";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -25,7 +26,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Home />
+      <Routes />
     </ThemeProvider>
   );
 }
