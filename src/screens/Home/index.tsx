@@ -12,8 +12,11 @@ import {
   Header,
   IconSendRight,
   Image,
+  NoMealText,
+  NotContainer,
   Snack,
   SubTextPorcentagem,
+  TextCreateMeal,
   TextDate,
   TextPorcentagem,
 } from "./styles";
@@ -110,6 +113,16 @@ export function Home() {
         contentContainerStyle={
           data.length === 0 && { flex: 1, justifyContent: "center" }
         }
+        ListEmptyComponent={() => {
+          return (
+            <NotContainer>
+              <NoMealText>Você ainda não tem refeição cadastradas</NoMealText>
+              <TextCreateMeal>
+                Crie suas refeições para aparecer aqui
+              </TextCreateMeal>
+            </NotContainer>
+          );
+        }}
         style={{ marginTop: 10, marginBottom: 50 }}
       />
     </Container>

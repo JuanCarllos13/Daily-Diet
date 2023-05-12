@@ -36,8 +36,5 @@ export async function mealsStatistics(mealDTO: MealDTO[]) {
     stats.percentage =
       Math.round((stats.inDiet / stats.totalMeals) * 100 * 100) / 100;
   }
-
-  console.log(stats)
-
   return {stats};
 }
