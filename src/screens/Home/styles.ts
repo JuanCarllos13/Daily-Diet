@@ -25,9 +25,14 @@ export const Image = styled.Image`
   border-color: #333638;
 `;
 
-export const BoxPorcentagem = styled.TouchableOpacity`
+interface BoxProps {
+  porcentagem: number;
+}
+
+export const BoxPorcentagem = styled.TouchableOpacity<BoxProps>`
   width: 100%;
-  background-color: ${({ theme }) => theme.COLORS.GREEN_MID};
+  background-color: ${({ theme, porcentagem }) =>
+    porcentagem < 50 ? theme.COLORS.RED_MID : theme.COLORS.GREEN_MID};
   height: 102px;
   align-items: center;
   justify-content: center;

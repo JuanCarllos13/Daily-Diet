@@ -21,56 +21,49 @@ import LogoImg from "@assets/Logo.svg";
 import { Button } from "@components/Button";
 import { Plus } from "phosphor-react-native";
 import { CardSnack } from "@components/CardSnack";
-import { useState } from "react";
-import { SnackDTO } from "src/dtos/snackDTO";
-import { useNavigation } from "@react-navigation/native";
+import { useCallback, useEffect, useState } from "react";
+import { MealDTO } from "src/dtos/snackDTO";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { DietGetAll } from "@storage/diet/dietGetAll";
+import {
+  MealsStatisticsProps,
+  mealsStatistics,
+} from "@storage/diet/Statistics";
 
 export function Home() {
   const navigation = useNavigation();
 
-  const [data, setData] = useState<SnackDTO[]>([
-    {
-      title: "12.04.23",
-      data: [
-        {
-          date: "12.04.23",
-          content: "X-tudo",
-          hour: "20:12",
-          description:
-            "Sanduíche de pão integral com atum e salada de alface e tomate",
-          name: "Sanduíche",
-          diet: true,
-        },
-        {
-          date: "12.04.23",
-          content: "X-tudo",
-          hour: "20:13",
-          description:
-            "Sanduíche de pão integral com atum e salada de alface e tomate",
-          name: "Sanduíche",
-          diet: false,
-        },
-      ],
-    },
-    {
-      title: "02.02.23",
-      data: [
-        {
-          date: "12.04.23",
-          content: "X-tudo",
-          hour: "20:10",
-          description:
-            "Sanduíche de pão integral com atum e salada de alface e tomate",
-          name: "Sanduíche",
-          diet: true,
-        },
-      ],
-    },
-  ]);
+  const [data, setData] = useState<MealDTO[]>([]);
+  const [porcentagem, setPorcentagem] = useState<
+    { stats: MealsStatisticsProps } | undefined
+  >();
 
   function handleOpenDetails() {
-    navigation.navigate("Details");
+    navigation.navigate("Details", { percentagem: porcentagem });
   }
+
+  async function fetchDiet() {
+    try {
+      const data = await DietGetAll();
+      setData(data);
+      const result = await mealsStatistics(data);
+      setPorcentagem(result);
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
+  }
+
+  // useEffect(() => {
+  //   const aux = list.filter((item) => item.isCompleted);
+  //   setTasksCompleted(aux.length);
+  // }, [list]);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchDiet();
+    }, [])
+  );
 
   return (
     <Container>
@@ -79,9 +72,14 @@ export function Home() {
         <Image source={{ uri: "https://github.com/JuanCarllos13.png" }} />
       </Header>
 
-      <BoxPorcentagem onPress={handleOpenDetails}>
+      <BoxPorcentagem
+        porcentagem={porcentagem?.stats.percentage ?? 0}
+        onPress={handleOpenDetails}
+      >
         <IconSendRight weight="bold" size={24} />
-        <TextPorcentagem>90.86%</TextPorcentagem>
+        <TextPorcentagem>
+          {porcentagem?.stats.percentage ?? "0"}%
+        </TextPorcentagem>
         <SubTextPorcentagem>das refeições dentro da dieta</SubTextPorcentagem>
       </BoxPorcentagem>
 
@@ -89,7 +87,7 @@ export function Home() {
       <Button
         text="Nova Refeição"
         icon={Plus}
-        onPress={() => navigation.navigate("NewSnack", {snack: undefined})}
+        onPress={() => navigation.navigate("NewSnack", { snack: undefined })}
       />
 
       <SectionList
@@ -99,7 +97,9 @@ export function Home() {
         renderItem={({ item, index }) => (
           <TouchableOpacity
             key={item.hour}
-            onPress={() => navigation.navigate("DetailsSnacK", { snack: item })}
+            onPress={() =>
+              navigation.navigate("DetailsSnacK", { snack: item, edit: false })
+            }
           >
             <CardSnack data={item} />
           </TouchableOpacity>
@@ -107,6 +107,9 @@ export function Home() {
         renderSectionHeader={({ section: { title } }) => (
           <TextDate>{title}</TextDate>
         )}
+        contentContainerStyle={
+          data.length === 0 && { flex: 1, justifyContent: "center" }
+        }
         style={{ marginTop: 10, marginBottom: 50 }}
       />
     </Container>

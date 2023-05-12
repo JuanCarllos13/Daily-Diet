@@ -8,11 +8,11 @@ export const Container = styled.View`
 `;
 
 interface SnackTitle {
-  snack: "positive" | "negative";
+  snack: boolean;
 }
 
 export const Title = styled.Text<SnackTitle>`
-  color: ${({ theme, snack }) => snack === "positive" ? theme.COLORS.GREEN_DARK: theme.COLORS.RED_DARK};
+  color: ${({ theme, snack }) => snack === true ? theme.COLORS.GREEN_DARK: theme.COLORS.RED_DARK};
   font-size: ${({ theme }) => theme.FONT_SIZE.XL}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
 `;

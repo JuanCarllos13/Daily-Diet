@@ -10,7 +10,6 @@ interface DataProps {
     name: string;
     description: string;
     diet: boolean;
-    content: string;
   };
 }
 
@@ -22,7 +21,7 @@ export function CardSnack({ data }: DataProps) {
       <Line />
 
       <Box>
-        <Text>{data.content}</Text>
+        <Text>{data.name}</Text>
 
         <Circle
           size={14}

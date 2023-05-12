@@ -1,14 +1,13 @@
-import { DetailsSnackProps } from "@screens/DetailsSnack";
-import { SnackDTO } from "src/dtos/snackDTO";
+import { MealContentDTO } from "src/dtos/snackDTO";
 
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       Home: undefined;
-      Details: undefined;
-      NewSnack: { snack?: DetailsSnackProps | undefined };
-      Finish: { diet: boolean };
-      DetailsSnacK: { snack: DetailsSnackProps };
+      Details: {percentagem: MealsStatisticsProps};
+      NewSnack: { snack?: MealContentDTO | undefined, edit?: boolean};
+      Finish: { diet: boolean,};
+      DetailsSnacK: { snack: MealContentDTO, edit: boolean };
     }
   }
 }

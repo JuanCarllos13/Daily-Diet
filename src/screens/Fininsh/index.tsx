@@ -5,7 +5,7 @@ import IllustrationNotImg from "@assets/Illustration (1).svg";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 interface RouteParams {
-  diet: "positive" | "negative";
+  diet:  boolean;
 }
 
 export function Finish() {
@@ -20,20 +20,20 @@ export function Finish() {
   return (
     <Container>
       <Title snack={diet}>
-        {diet === "positive" ? "Continue assim!" : "Que pena!"}
+        {diet === true ? "Continue assim!" : "Que pena!"}
       </Title>
 
       <SubTitle>
-        {diet === "positive" ? " Você continua" : "Você"}{" "}
+        {diet === true ? " Você continua" : "Você"}{" "}
         <TextNegrito>
-          {diet === "positive" ? "dentro da dieta. " : "saiu da dieta "}
+          {diet === true ? "dentro da dieta. " : "saiu da dieta "}
         </TextNegrito>
-        {diet === "positive"
+        {diet === true
           ? " Muito bem!"
           : "dessa vez, mas continue se esforçando e não desista!"}
       </SubTitle>
 
-      {diet === "positive" ? <IllustrationImg /> : <IllustrationNotImg />}
+      {diet === true ? <IllustrationImg /> : <IllustrationNotImg />}
 
       <Footer>
         <Button text="Ir para página inicial" onPress={goBack} />

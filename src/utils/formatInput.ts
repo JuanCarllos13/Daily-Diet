@@ -18,7 +18,6 @@ export const ValidateHour = (text: string) => {
 
 
 export const ValidadeDate = (text: string) => {
-  console.log('Text', text)
   const cleanedText = text.replace(/[^0-9]/g, "");
 
   let formattedText = cleanedText;

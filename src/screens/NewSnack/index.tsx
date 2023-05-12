@@ -19,6 +19,9 @@ import { ValidadeDate, ValidateHour } from "@utils/formatInput";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { createDiet } from "@storage/diet/createDiet";
+import { MealContentDTO } from "../../dtos/snackDTO";
+import { updateSnack } from "@storage/diet/updateDiet";
 
 const schema = z.object({
   name: z
@@ -30,29 +33,21 @@ const schema = z.object({
   diet: z.boolean(),
 });
 
-export interface DetailsSnackProps {
-  date: string;
-  hour: string;
-  name: string;
-  description: string;
-  diet: boolean;
-  content: string;
-}
-
 interface Props {
-  snack: DetailsSnackProps;
+  snack: MealContentDTO;
+  edit: boolean;
 }
 
 export function NewSnack() {
   const router = useRoute();
-  const { snack } = router.params as Props;
+  const { snack, edit } = router.params as Props;
 
   const {
     control,
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<DetailsSnackProps>({
+  } = useForm<MealContentDTO>({
     defaultValues: {
       name: snack?.name,
       date: snack?.date ? ValidadeDate(snack?.date) : "",
@@ -76,11 +71,29 @@ export function NewSnack() {
     return setValue("diet", type);
   }
 
-  function handleFinishRegister(data: DetailsSnackProps) {
-    console.log(data);
-    // navigation.navigate("Finish", {
-    //   diet: type,
-    // });
+  async function handleFinishRegister(data: MealContentDTO) {
+    if (edit) {
+      await updateSnack({
+        date: data.date,
+        hour: data.hour,
+        name: data.name,
+        description: data.description,
+        diet: data.diet,
+        id: snack.id,
+      });
+    } else {
+      await createDiet({
+        id: new Date(),
+        date: data.date,
+        hour: data.hour,
+        name: data.name,
+        description: data.description,
+        diet: data.diet,
+      });
+    }
+    navigation.navigate("Finish", {
+      diet: type,
+    });
   }
 
   return (
@@ -202,7 +215,7 @@ export function NewSnack() {
         <Footer>
           <Button
             onPress={handleSubmit(handleFinishRegister)}
-            text="Cadastrar nova refeição"
+            text={edit ? "Salvar alterações" : "Cadastrar nova refeição"}
             disabled={isSubmitting}
           />
         </Footer>
