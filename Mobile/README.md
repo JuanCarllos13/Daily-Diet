@@ -3,10 +3,16 @@
 <h5 align="center">DIET Ignite é o app de refeições de dieta, App feito no Desafio 02 da trilha de React Native 2023</h5>
 
 <h1 align="center">
- [ <img src="./assets/Logo.svg" width="300" />](https://github.com/JuanCarllos13/Daily-Diet/assets/86435195/ad58b0dc-13ff-4b3e-9bf9-f0fc4f9095d2)
+ <img src="./assets/Logo.svg" width="300" />
+ 
 </h1>
 
 <br/>
+
+
+
+
+https://github.com/JuanCarllos13/Daily-Diet/assets/86435195/ad58b0dc-13ff-4b3e-9bf9-f0fc4f9095d2
 
 <br/>
 
@@ -21,7 +27,7 @@
 ```
 # Clone do repositório
 Faça o clone da aplicação
-$ git clone https://github.com/JuanCarllos13/Todo-Ignite
+$ git clone https://github.com/JuanCarllos13/Daily-Diet
 ```
 
 ## Rodando o projeto mobile
