@@ -39,28 +39,31 @@ export function DetailsSnacK() {
   }
 
   async function deleteSnack() {
-    await RemoveDiet(snack);
+    await RemoveDiet(snack)
+    setModalVisible(false)
+    navigator.navigate("Home")
   }
+
 
   return (
     <Container snack={snack.diet}>
       <Header />
 
       <Content>
-        <Title>{snack?.name}</Title>
-        <Description>{snack?.description}</Description>
+        <Title>{snack.name}</Title>
+        <Description>{snack.description}</Description>
         <DateAndHour>Data e Hora</DateAndHour>
         <Box>
-          <TextBox>{snack?.date}</TextBox>
+          <TextBox>{snack.date}</TextBox>
           <TextBox>ás</TextBox>
-          <TextBox>{snack?.hour}</TextBox>
+          <TextBox>{snack.hour}</TextBox>
         </Box>
 
         <BoxSnack>
           <Circle
             size={10}
             weight="fill"
-            color={snack?.diet ? "green" : "red"}
+            color={snack.diet ? "green" : "red"}
           />
           <TextSnack>
             {snack?.diet ? "dentro da dieta" : "fora da dieta"}
@@ -101,11 +104,7 @@ export function DetailsSnacK() {
                 textColor="black"
                 onPress={() => setModalVisible(false)}
               />
-              <Button
-                text="Sim, excluir"
-                style={{ width: 135 }}
-                onPress={deleteSnack}
-              />
+              <Button text="Sim, excluir" style={{ width: 135 }} onPress={deleteSnack}/>
             </ContainerButtonModal>
           </ContainerModal>
         </ContainerBoxModal>
