@@ -1,13 +1,17 @@
-import { Text, View } from "react-native";
+import { Modal, Text } from "react-native";
 import {
   Box,
   BoxSnack,
   Container,
+  ContainerBoxModal,
+  ContainerButtonModal,
+  ContainerModal,
   Content,
   DateAndHour,
   Description,
   Footer,
   TextBox,
+  TextModal,
   TextSnack,
   Title,
 } from "./styles";
@@ -16,13 +20,15 @@ import { MealContentDTO } from "src/dtos/snackDTO";
 import { Header } from "@components/Header";
 import { Button } from "@components/Button";
 import { Circle, PencilSimple, Trash } from "phosphor-react-native";
-
+import { useState } from "react";
+import { RemoveDiet } from "@storage/diet/removeMeal";
 
 interface Props {
   snack: MealContentDTO;
 }
 
 export function DetailsSnacK() {
+  const [modalVisible, setModalVisible] = useState(false);
   const router = useRoute();
   const navigator = useNavigation();
 
@@ -32,25 +38,29 @@ export function DetailsSnacK() {
     navigator.navigate("NewSnack", { snack, edit: true });
   }
 
+  async function deleteSnack() {
+    await RemoveDiet(snack);
+  }
+
   return (
     <Container snack={snack.diet}>
       <Header />
 
       <Content>
-        <Title>{snack.name}</Title>
-        <Description>{snack.description}</Description>
+        <Title>{snack?.name}</Title>
+        <Description>{snack?.description}</Description>
         <DateAndHour>Data e Hora</DateAndHour>
         <Box>
-          <TextBox>{snack.date}</TextBox>
+          <TextBox>{snack?.date}</TextBox>
           <TextBox>ás</TextBox>
-          <TextBox>{snack.hour}</TextBox>
+          <TextBox>{snack?.hour}</TextBox>
         </Box>
 
         <BoxSnack>
           <Circle
             size={10}
             weight="fill"
-            color={snack.diet ? "green" : "red"}
+            color={snack?.diet ? "green" : "red"}
           />
           <TextSnack>
             {snack?.diet ? "dentro da dieta" : "fora da dieta"}
@@ -70,9 +80,36 @@ export function DetailsSnacK() {
             textColor="black"
             icon={Trash}
             iconColor="black"
+            onPress={() => setModalVisible(true)}
           />
         </Footer>
       </Content>
+
+      <Modal
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+        transparent
+        animationType="fade"
+      >
+        <ContainerBoxModal>
+          <ContainerModal>
+            <TextModal>Deseja realmente excluir registro da refeição</TextModal>
+            <ContainerButtonModal>
+              <Button
+                text="Cancelar"
+                style={{ width: 135, backgroundColor: "white" }}
+                textColor="black"
+                onPress={() => setModalVisible(false)}
+              />
+              <Button
+                text="Sim, excluir"
+                style={{ width: 135 }}
+                onPress={deleteSnack}
+              />
+            </ContainerButtonModal>
+          </ContainerModal>
+        </ContainerBoxModal>
+      </Modal>
     </Container>
   );
 }

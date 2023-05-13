@@ -81,7 +81,7 @@ export function Home() {
       >
         <IconSendRight weight="bold" size={24} />
         <TextPorcentagem>
-          {porcentagem?.stats.percentage ?? "0"}%
+          {porcentagem?.stats?.percentage ?? "0"}%
         </TextPorcentagem>
         <SubTextPorcentagem>das refeições dentro da dieta</SubTextPorcentagem>
       </BoxPorcentagem>
@@ -94,7 +94,7 @@ export function Home() {
       />
 
       <SectionList
-        sections={data}
+        sections={data ?? []}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item) => item.hour}
         renderItem={({ item, index }) => (

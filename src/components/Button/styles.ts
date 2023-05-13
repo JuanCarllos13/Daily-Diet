@@ -2,6 +2,8 @@ import styled from "styled-components/native";
 
 export const Container = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.COLORS.GRAY_200};
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.COLORS.GRAY_200};
   border-radius: 6px;
   height: 50px;
   align-items: center;
@@ -9,9 +11,8 @@ export const Container = styled.TouchableOpacity`
   flex-direction: row;
 `;
 
-
-interface TextColorProps{
-  color?: string
+interface TextColorProps {
+  color?: string;
 }
 
 export const Text = styled.Text<TextColorProps>`
