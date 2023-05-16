@@ -1,10 +1,21 @@
-import { User, Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 import { UserRepository } from "../users-repository";
 
 export class InMemoryUsersRepository implements UserRepository {
   public items: User[] = [];
 
+  async Update(userId: string, photoId: string){
+    const userIndex = this.items.findIndex((item) => item.id === userId);
+    
+    if (userIndex === -1) {
+      return null;
+    }
+  
+    this.items[userIndex].photo = photoId;
+  
+    return this.items[userIndex];
+  }
   async findById(id: string) {
     const user = this.items.find((item) => item.id === id);
 

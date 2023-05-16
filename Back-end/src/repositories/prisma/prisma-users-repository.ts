@@ -1,8 +1,21 @@
 import { Prisma } from "@prisma/client";
+import { prismaClient } from "../../prisma";
 import { UserRepository } from "../users-repository";
-import { prismaClient } from "@/prisma";
 
 export class PrismaUserRepository implements UserRepository {
+  async Update(userId: string, photoId: string) {
+    const user = await prismaClient.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        photo: photoId,
+      },
+    });
+
+    return user;
+  }
+
   async findById(id: string) {
     const user = await prismaClient.user.findUnique({
       where: {

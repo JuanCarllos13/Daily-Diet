@@ -1,3 +1,4 @@
+import { InvalidCredentialsError } from "@/services/errors/Invalid-Credentials-Error";
 import { makeAuthUserService } from "@/services/factories/make-auth-user-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
@@ -15,18 +16,17 @@ class AuthUserController {
 
       const { user } = await authenticateService.execute({ email, password });
 
-      const token = await response.jwtSign({
-        sign: {
-          sub: user.id,
-        },
-      });
+      const token = await response.jwtSign({}, { sign: { sub: user.id } });
 
-      const refreshToken = await response.jwtSign({
-        sign: {
-          sub: user.id,
-          expiresIn: "7d",
-        },
-      });
+      const refreshToken = await response.jwtSign(
+        {},
+        {
+          sign: {
+            sub: user.id,
+            expiresIn: "7d",
+          },
+        }
+      );
 
       return response
         .setCookie("refreshToken", refreshToken, {
@@ -37,8 +37,13 @@ class AuthUserController {
         })
         .status(200)
         .send({ token });
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof InvalidCredentialsError) {
+        return response.status(409).send({ message: error.message });
+      }
+    }
   }
 }
 
 export { AuthUserController };
+
