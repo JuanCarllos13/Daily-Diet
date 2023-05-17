@@ -5,13 +5,13 @@ export async function refresh(request: FastifyRequest, response: FastifyReply) {
 
   const token = await response.jwtSign({
     sign: {
-      sub: request.user.sub,
+      sub: request.user.sign.sub,
     },
   });
 
   const refreshToken = await response.jwtSign({
     sign: {
-      sub: request.user.sub,
+      sub: request.user.sign.sub,
       expiresIn: "7d",
     },
   });

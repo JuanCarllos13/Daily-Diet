@@ -1,28 +1,21 @@
 import { makeUpdateProfileUserService } from "@/services/factories/make-update-user-profile-service";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { z } from "zod";
 
 class UpdateUserProfileController {
   async handle(request: FastifyRequest, response: FastifyReply) {
     const updateProfile = makeUpdateProfileUserService();
+    const data = await request.file();
 
-    const updateUserBodySchema = z.object({
-      photo: z.string(),
-    });
+    if (!data) {
+      throw new Error("error upload file");
+    } else {
+      const user = await updateProfile.execute({
+        userId: request.user.sign.sub,
+        photo: `http://localhost:3333/product-file/${data.filename}`,
+      });
 
-    const { photo } = updateUserBodySchema.parse(request.body);
-
-    const data = await updateProfile.execute({
-      userId: request.user.sign.sub,
-      photo,
-    });
-
-    return response.status(200).send({
-      user: {
-        ...data,
-        password: undefined,
-      },
-    });
+      return response.status(200).send({ ...user, password: undefined });
+    }
   }
 }
 

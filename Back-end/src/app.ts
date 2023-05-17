@@ -1,8 +1,10 @@
-import fastifyJwt from "@fastify/jwt";
+import { env } from "@/env";
 import fastifyCoolie from "@fastify/cookie";
+import fastifyCors from "@fastify/cors";
+import fastifyJwt from "@fastify/jwt";
+import fastifyMultipart from '@fastify/multipart';
 import fastify from "fastify";
 import { ZodError } from "zod";
-import { env } from "@/env";
 import { usersRoutes } from "./controllers/users/routes";
 
 export const app = fastify();
@@ -17,6 +19,14 @@ app.register(fastifyJwt, {
     expiresIn: "10m ",
   },
 });
+
+app.register(fastifyMultipart)
+
+app.register(fastifyCors, {
+  origin: true,
+})
+
+
 
 app.register(fastifyCoolie);
 app.register(usersRoutes);
