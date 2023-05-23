@@ -1,15 +1,12 @@
 import { FastifyInstance } from "fastify";
-import multer from "multer";
-import multerConfig from "../../config/multer";
 import { AuthUserController } from "./authController";
 import { CreateUserController } from "./createUserController";
 import { GetUserProfileController } from "./getUserProfileController";
 import { UpdateUserProfileController } from "./updateUserProfileController";
 
 import { verifyJWT } from "../../middlewares/isAuthenticated";
+import { filedUpload } from '../../upload/upload';
 import { refresh } from "./refresh";
-
-const upload = multer(multerConfig);
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post("/users", new CreateUserController().handle);
@@ -25,8 +22,7 @@ export async function usersRoutes(app: FastifyInstance) {
 
   app.put(
     "/user/update",
-    upload.single("file"),
-    { onRequest: [verifyJWT] },
+    { onRequest: [verifyJWT], preHandler: filedUpload},
     new UpdateUserProfileController().handle
   );
 }
