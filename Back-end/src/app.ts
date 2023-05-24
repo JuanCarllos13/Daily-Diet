@@ -7,6 +7,7 @@ import fastifyStatic from "@fastify/static";
 import fastify from "fastify";
 import { resolve } from "path";
 import { ZodError } from "zod";
+import { MealsRoutes } from "./controllers/meals/routes";
 import { usersRoutes } from "./controllers/users/routes";
 
 export const app = fastify();
@@ -34,6 +35,7 @@ app.register(fastifyCors, {
 });
 app.register(fastifyCoolie);
 app.register(usersRoutes);
+app.register(MealsRoutes);
 
 app.setErrorHandler((error, _request, response) => {
   if (error instanceof ZodError) {

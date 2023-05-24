@@ -1,5 +1,5 @@
 import { PrismaUserRepository } from "@/repositories/prisma/prisma-users-repository";
-import { UpdateUserProfileService } from "../user/updateUserProfileService";
+import { UpdateUserProfileService } from "../../user/updateUserProfileService";
 
 export function makeUpdateProfileUserService() {
   const prismaUsersRepository = new PrismaUserRepository();

@@ -1,6 +1,6 @@
 import { UserAlreadyExistsError } from "@/services/errors/user-already-exists-error";
-import { makeCreateUserService } from "@/services/factories/make-create-user-service";
-import { FastifyRequest, FastifyReply } from "fastify";
+import { makeCreateUserService } from "@/services/factories/user/make-create-user-service";
+import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 class CreateUserController {
@@ -26,3 +26,4 @@ class CreateUserController {
 }
 
 export { CreateUserController };
+

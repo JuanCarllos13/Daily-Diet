@@ -1,4 +1,4 @@
-import { makeGetUserProfileService } from "@/services/factories/make-get-user-profile-service";
+import { makeGetUserProfileService } from "@/services/factories/user/make-get-user-profile-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 
 class GetUserProfileController {

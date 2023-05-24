@@ -1,4 +1,4 @@
-import { makeUpdateProfileUserService } from "@/services/factories/make-update-user-profile-service";
+import { makeUpdateProfileUserService } from "@/services/factories/user/make-update-user-profile-service";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
