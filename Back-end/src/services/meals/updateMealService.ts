@@ -32,7 +32,7 @@ class updateMealService {
       user_id: data.user_id,
     });
 
-    return { meals };
+    return meals ;
   }
 }
 

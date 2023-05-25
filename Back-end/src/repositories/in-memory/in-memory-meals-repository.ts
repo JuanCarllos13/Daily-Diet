@@ -5,6 +5,10 @@ import { MealsRepository } from "../meals-repository";
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = [];
 
+  async remove(meal_id: string) {
+    this.items = this.items.filter((meal) => meal.id !== meal_id);
+  }
+
   async Update(meal_id: string, data: Prisma.MealUncheckedCreateInput) {
     const userIndex = this.items.findIndex((item) => item.id === meal_id);
 

@@ -9,7 +9,10 @@ class GetAllMealsController {
       user_id: request.user.sub,
     });
 
-    response.send(meals);
+    response.send({
+        ...meals,
+        user_id: undefined
+    });
   }
 }
 

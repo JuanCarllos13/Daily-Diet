@@ -9,7 +9,7 @@ class GetAllMeals {
   async execute({ user_id }: getAllRequest) {
     const meals = await this.MealRepository.findByMany(user_id);
 
-    return { meals };
+    return {meals} ;
   }
 }
 

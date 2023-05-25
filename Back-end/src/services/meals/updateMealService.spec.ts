@@ -22,7 +22,7 @@ describe("Update Meals", () => {
       id: '1'
     });
     
-    const { meals } = await sut.execute({
+    const meal = await sut.execute({
       meal_id: "1", data: {
         name: 'carlos',
         date: "",
@@ -33,6 +33,6 @@ describe("Update Meals", () => {
       }
     });
 
-    expect(meals?.name).toEqual("carlos");
+    expect(meal?.name).toEqual("carlos");
   });
 });
