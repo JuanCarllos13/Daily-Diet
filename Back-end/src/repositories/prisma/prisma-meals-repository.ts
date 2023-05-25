@@ -3,13 +3,13 @@ import { Meal, Prisma } from "@prisma/client";
 import { MealsRepository } from "../meals-repository";
 
 export class PrismaMealsRepository implements MealsRepository {
-  async findByMany(userId: string){
+  async findByMany(userId: string) {
     const meals = await prismaClient.meal.findMany({
       where: {
-        user_id: userId
-      }
-    })
-    return meals
+        user_id: userId,
+      },
+    });
+    return meals;
   }
 
   async findById(id: string) {
@@ -22,7 +22,6 @@ export class PrismaMealsRepository implements MealsRepository {
     return user;
   }
 
-
   async create(data: Prisma.MealUncheckedCreateInput) {
     const meals = await prismaClient.meal.create({
       data,
@@ -31,7 +30,20 @@ export class PrismaMealsRepository implements MealsRepository {
     return meals;
   }
 
-  Update(userId: string, photoId: string | null): Promise<Meal | null> {
-    throw new Error("Method not implemented.");
+  async Update(userId: string, data: Prisma.MealUncheckedCreateInput) {
+    const user = await prismaClient.meal.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        date: data.date,
+        hours: data.hours,
+        diet: data.diet,
+        description: data.description,
+        name: data.name,
+      },
+    });
+
+    return user;
   }
 }

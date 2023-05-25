@@ -5,6 +5,22 @@ import { MealsRepository } from "../meals-repository";
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = [];
 
+  async Update(meal_id: string, data: Prisma.MealUncheckedCreateInput) {
+    const userIndex = this.items.findIndex((item) => item.id === meal_id);
+
+    if (userIndex === -1) {
+      return null;
+    }
+
+    this.items[userIndex].date = data.date;
+    this.items[userIndex].description = data.description;
+    this.items[userIndex].diet = data.diet;
+    this.items[userIndex].hours = data.hours;
+    this.items[userIndex].name = data.name;
+
+    return this.items[userIndex];
+  }
+
   async findById(id: string) {
     const meals = this.items.find((item) => item.id === id);
 
@@ -18,10 +34,6 @@ export class InMemoryMealsRepository implements MealsRepository {
     const meals = this.items.filter((item) => item.user_id === userId);
 
     return meals;
-  }
-
-  Update(userId: string, photoId: string | null): Promise<Meal | null> {
-    throw new Error("Method not implemented.");
   }
 
   async create(data: Prisma.MealUncheckedCreateInput): Promise<Meal> {
