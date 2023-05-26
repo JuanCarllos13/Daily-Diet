@@ -6,9 +6,9 @@ Deletar o docker: docker compose down
 
 Para o docker: docker compose stop
 
-rodar a imagem: docker start api-gymPass-pg
+rodar a imagem: docker start pg-diet
 
-Parar a imagem: docker stop api-gymPass-pg
+Parar a imagem: docker stop pg-diet
 
 Listar as imagens: docker ps -a
 
