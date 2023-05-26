@@ -1,6 +1,6 @@
-import { StatusBar, View, ActivityIndicator } from "react-native";
+import { StatusBar, ActivityIndicator } from "react-native";
 import { ThemeProvider } from "styled-components/native";
-import { Home } from "./src/screens/Home";
+import { AuthContextProvider } from "./src/context/AuthContext";
 import {
   useFonts,
   Nunito_400Regular,
@@ -26,7 +26,9 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      <Routes />
+      <AuthContextProvider>
+        <Routes />
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }

@@ -18,9 +18,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { MealsStatisticsProps } from "@storage/diet/Statistics";
 
 interface DetailsProps {
-  percentagem: {
-    stats: MealsStatisticsProps;
-  };
+  percentagem: MealsStatisticsProps;
 }
 
 export function Details() {
@@ -40,7 +38,7 @@ export function Details() {
           <ArrowLeft weight="bold" size={24} />
         </IconSendRightButton>
 
-        <TextPorcentagem>{percentagem?.stats?.percentage}%</TextPorcentagem>
+        <TextPorcentagem>{percentagem?.percentage}%</TextPorcentagem>
         <SubTextPorcentagem>das refeições dentro da dieta</SubTextPorcentagem>
       </Header>
 
@@ -48,24 +46,24 @@ export function Details() {
         <Title>Estatística gerais</Title>
 
         <BoxSequence>
-          <NumberInfo>{percentagem.stats.bestSequence}</NumberInfo>
+          <NumberInfo>{percentagem.bestSequence}</NumberInfo>
           <TextSequence>
             Melhor sequência de pratos dentro da dieta
           </TextSequence>
         </BoxSequence>
 
         <BoxSequence>
-          <NumberInfo>{percentagem.stats.totalMeals}</NumberInfo>
+          <NumberInfo>{percentagem.totalMeals}</NumberInfo>
           <TextSequence>refeições registrada</TextSequence>
         </BoxSequence>
 
         <ContainerSnack>
           <BoxSnack style={{ backgroundColor: "#E5F0Db" }}>
-            <NumberInfo>{percentagem.stats.inDiet}</NumberInfo>
+            <NumberInfo>{percentagem.inDiet}</NumberInfo>
             <BoxTextSnack>refeições dentro da dieta</BoxTextSnack>
           </BoxSnack>
           <BoxSnack style={{ backgroundColor: "#F4E6E7" }}>
-            <NumberInfo>{percentagem.stats.outDiet}</NumberInfo>
+            <NumberInfo>{percentagem.outDiet}</NumberInfo>
             <BoxTextSnack>refeições fora da dieta</BoxTextSnack>
           </BoxSnack>
         </ContainerSnack>

@@ -17,12 +17,16 @@ export const Header = styled.View`
   align-items: center;
 `;
 
+export const ContainerImage =styled.View`
+  border-radius: 20px;
+  border-width: 2px;
+  border-color: #333638;
+`
+
 export const Image = styled.Image`
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  border-width: 2px;
-  border-color: #333638;
 `;
 
 interface BoxProps {
@@ -88,4 +92,54 @@ export const TextCreateMeal = styled.Text`
   color: ${({ theme }) => theme.COLORS.GRAY_200};
   font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
   font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
+`;
+
+
+export const ContainerBoxModal = styled.View`
+  flex: 1;
+  background: rgba(0, 0, 0, 0.25);
+  justify-content: center;
+  align-items: center;
+`;
+
+
+
+export const ContainerModal = styled.View`
+  width: 90%;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  border-radius: 8px;
+
+`;
+
+export const PreviewImagemModal = styled.Image`
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
+`
+
+export const TextUpdateImage = styled.Text`
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
+  color: ${({ theme }) => theme.COLORS.GRAY_200};
+`
+
+export const TextModal = styled.Text`
+  font-size: ${({ theme }) => theme.FONT_SIZE.LG}px;
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
+  color: ${({ theme }) => theme.COLORS.GRAY_200};
+  text-align: center;
+  margin-bottom: 32px;
+`;
+
+export const ContainerButtonModal = styled.View`
+  width: 90%;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 `;

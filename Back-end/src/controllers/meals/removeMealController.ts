@@ -6,13 +6,13 @@ class removeMealController {
   async handle(request: FastifyRequest, response: FastifyReply) {
     const removeMeal = makeRemoveMealService();
     const schemaRemove = z.object({
-      meal_id: z.string(),
+      mealId: z.string(),
     });
 
-    const { meal_id } = schemaRemove.parse(request.body);
+    const { mealId } = schemaRemove.parse(request.body);
 
     await removeMeal.execute({
-      meal_id: meal_id,
+      meal_id: mealId,
     });
 
     return response.send();

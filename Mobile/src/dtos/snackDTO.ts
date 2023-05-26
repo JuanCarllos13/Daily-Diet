@@ -1,5 +1,5 @@
 export type MealContentDTO = {
-  id: Date;
+  id: string;
   date: string;
   hour: string;
   name: string;

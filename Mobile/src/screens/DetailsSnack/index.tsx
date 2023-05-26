@@ -22,6 +22,7 @@ import { Button } from "@components/Button";
 import { Circle, PencilSimple, Trash } from "phosphor-react-native";
 import { useState } from "react";
 import { RemoveDiet } from "@storage/diet/removeMeal";
+import { api } from "../../service/api";
 
 interface Props {
   snack: MealContentDTO;
@@ -39,11 +40,15 @@ export function DetailsSnacK() {
   }
 
   async function deleteSnack() {
-    await RemoveDiet(snack)
-    setModalVisible(false)
-    navigator.navigate("Home")
-  }
+    console.log(snack.id)
+    await api.delete('/meal', {
+      data: {
+        mealId: snack.id
+      }
+    });
 
+    navigator.navigate("Home");
+  }
 
   return (
     <Container snack={snack.diet}>

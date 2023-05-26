@@ -19,5 +19,4 @@ export const Text = styled.Text<TextColorProps>`
   color: ${({ theme, color }) => color ?? theme.COLORS.WHITE};
   font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  margin-left: 12px;
 `;

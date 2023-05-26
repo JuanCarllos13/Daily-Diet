@@ -2,11 +2,11 @@ import { DietGetAll } from "./dietGetAll";
 import { MealDTO, MealContentDTO } from "../../dtos/snackDTO";
 
 export type MealsStatisticsProps = {
-  percentage: number;
-  totalMeals: number;
-  inDiet: number;
-  outDiet: number;
-  bestSequence: number;
+  percentage: number,
+	totalMeals: number,
+	inDiet: number,
+	outDiet: number,
+	bestSequence: number
 };
 
 export async function mealsStatistics(mealDTO: MealDTO[]) {

@@ -11,12 +11,12 @@ class UpdateUserProfileController {
     });
 
     const { filename, originalname } = updateFileProps.parse(request.file);
-    console.log(filename)
+    console.log(filename);
 
     if (!filename || !originalname) {
       throw new Error("error upload file");
     } else {
-      const user = await updateProfile.execute({
+      await updateProfile.execute({
         userId: request.user.sub,
         photo: filename,
       });
@@ -25,8 +25,6 @@ class UpdateUserProfileController {
       const fileUrl = new URL(`/user/update/${filename}`, fullUrl).toString();
 
       return response.status(200).send({
-        ...user,
-        password: undefined,
         photo: fileUrl,
       });
     }
@@ -34,4 +32,3 @@ class UpdateUserProfileController {
 }
 
 export { UpdateUserProfileController };
-

@@ -17,8 +17,8 @@ export const Content = styled.View`
 export const BoxDateAndHour = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-bottom: 20px;
 `;
 
 interface SnackProps {

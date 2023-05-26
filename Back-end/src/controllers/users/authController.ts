@@ -36,7 +36,7 @@ class AuthUserController {
           httpOnly: true,
         })
         .status(200)
-        .send({ token });
+        .send({ user, token });
     } catch (error) {
       if (error instanceof InvalidCredentialsError) {
         return response.status(409).send({ message: error.message });

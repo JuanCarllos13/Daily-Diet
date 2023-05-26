@@ -17,7 +17,7 @@ interface ButtonProps extends TouchableOpacityProps {
 export function Button({ text, icon: IconComponent, textColor,iconColor,  ...rest }: ButtonProps) {
   return (
     <Container {...rest}>
-      {IconComponent && <IconComponent color={iconColor ?? "white"} size={18}/>}
+      {IconComponent ? <IconComponent color={iconColor ?? "white"} size={18}/>: null}
       <Text color={textColor}>{text}</Text>
     </Container>
   );

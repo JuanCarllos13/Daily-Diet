@@ -22,6 +22,7 @@ import { z } from "zod";
 import { createDiet } from "@storage/diet/createDiet";
 import { MealContentDTO } from "../../dtos/snackDTO";
 import { updateSnack } from "@storage/diet/updateDiet";
+import { api } from "../../service/api";
 
 const schema = z.object({
   name: z
@@ -73,19 +74,19 @@ export function NewSnack() {
 
   async function handleFinishRegister(data: MealContentDTO) {
     if (edit) {
-      await updateSnack({
+      await api.patch("/meal", {
         date: data.date,
-        hour: data.hour,
+        hours: data.hour,
         name: data.name,
         description: data.description,
         diet: data.diet,
-        id: snack.id,
+        meal_id: snack.id
       });
     } else {
-      await createDiet({
-        id: new Date(),
+      console.log('aqui')
+      await api.post("/meal", {
         date: data.date,
-        hour: data.hour,
+        hours: data.hour,
         name: data.name,
         description: data.description,
         diet: data.diet,

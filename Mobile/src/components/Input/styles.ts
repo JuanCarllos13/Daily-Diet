@@ -1,14 +1,16 @@
 import styled from "styled-components/native";
 
-export const Container = styled.View`
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
 interface TextInputProps {
   width?: "LG" | "SM";
   height?: "LG" | "SM";
 }
+
+export const Container = styled.View<TextInputProps>`
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: ${({ width }) => (width === "SM" ? "153px" : "100%")};
+  height: ${({ height }) => (height === "LG" ? "120px" : "48px")};
+`;
 
 export const TextInput = styled.TextInput<TextInputProps>`
   border-width: 1px;

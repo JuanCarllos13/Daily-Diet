@@ -10,6 +10,8 @@ export async function createDiet(content: MealContentDTO) {
       (snackList: { title: string, data: MealContentDTO[] }) =>
         snackList.title === content.date
     );
+
+    
     if (snackIndex !== -1) {
       storedSnacks[snackIndex].data.push(content);
     } else {
@@ -18,6 +20,7 @@ export async function createDiet(content: MealContentDTO) {
         data: [content],
       });
     }
+    
     await AsyncStorage.setItem(DIET_COLLECTION, JSON.stringify(storedSnacks));
   } catch (error) {
     console.log(error);
